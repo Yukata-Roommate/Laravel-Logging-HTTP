@@ -126,7 +126,7 @@ class Contents
      */
     protected function requestUrl(): string
     {
-        return $this->configRequestUrl() ? e($this->request->getRequestUri()) : "";
+        return $this->configRequestUrl() ? $this->request->getRequestUri() : "";
     }
 
     /**
@@ -136,7 +136,7 @@ class Contents
      */
     protected function requestHttpMethod(): string
     {
-        return $this->configRequestHttpMethod() ? e($this->request->method()) : "";
+        return $this->configRequestHttpMethod() ? $this->request->method() : "";
     }
 
     /**
@@ -146,7 +146,7 @@ class Contents
      */
     protected function requestUserAgent(): string
     {
-        return $this->configRequestUserAgent() ? e($this->request->userAgent()) : "";
+        return $this->configRequestUserAgent() ? $this->request->userAgent() : "";
     }
 
     /**
@@ -156,7 +156,7 @@ class Contents
      */
     protected function requestIpAddress(): string
     {
-        return $this->configRequestIpAddress() ? e($this->request->ip()) : "";
+        return $this->configRequestIpAddress() ? $this->request->ip() : "";
     }
 
     /**
@@ -166,7 +166,7 @@ class Contents
      */
     protected function requestBody(): string
     {
-        return $this->configRequestBody() ? e($this->request->all()) : "";
+        return $this->configRequestBody() ? $this->request->all() : "";
     }
 
     /*----------------------------------------*
@@ -197,7 +197,7 @@ class Contents
      */
     protected function responseStatusText(): string
     {
-        return $this->configResponseStatusText() ? e($this->response->statusText()) : "";
+        return $this->configResponseStatusText() ? $this->response->statusText() : "";
     }
 
     /*----------------------------------------*
