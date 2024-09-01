@@ -162,11 +162,11 @@ class Contents
     /**
      * get request body
      * 
-     * @return string
+     * @return array<string, mixed>
      */
-    protected function requestBody(): string
+    protected function requestBody(): array
     {
-        return $this->configRequestBody() ? $this->request->all() : "";
+        return $this->configRequestBody() ? $this->request->all() : [];
     }
 
     /*----------------------------------------*
