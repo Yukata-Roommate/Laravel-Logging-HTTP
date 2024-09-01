@@ -1,0 +1,35 @@
+{
+    "name": "yukata-roommate/laravel-logging-http",
+    "description": "Logging HTTP Access for Laravel",
+    "type": "library",
+    "license": "MIT",
+    "version": "1.0.0",
+    "autoload": {
+        "psr-4": {
+            "YukataRm\\Laravel\\Logging\\Http\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "YukataRm\\Laravel\\Logging\\Http\\Provider\\MiddlewareServiceProvider",
+                "YukataRm\\Laravel\\Logging\\Http\\Provider\\PublicationServiceProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "Yukata Roommate",
+            "email": "contact@yukata-roommate.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.2.0",
+        "laravel/framework": "^11.0",
+        "yukata-roommate/laravel-provider": "^1.0.0",
+        "yukata-roommate/laravel-logger": "^1.0.0",
+        "yukata-roommate/warehouse": "^1.0.0",
+        "yukata-roommate/timer": "^1.0.0"
+    },
+    "minimum-stability": "dev"
+}
