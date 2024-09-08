@@ -3,7 +3,7 @@
     "description": "Logging HTTP Access for Laravel",
     "type": "library",
     "license": "MIT",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "autoload": {
         "psr-4": {
             "YukataRm\\Laravel\\Logging\\Http\\": "src"
@@ -27,6 +27,7 @@
         "php": ">=8.2.0",
         "laravel/framework": "^11.0",
         "yukata-roommate/laravel-provider": "^1.0.0",
+        "yukata-roommate/laravel-middleware": "^1.0.0",
         "yukata-roommate/laravel-logger": "^1.0.0",
         "yukata-roommate/warehouse": "^1.0.0",
         "yukata-roommate/timer": "^1.0.0"

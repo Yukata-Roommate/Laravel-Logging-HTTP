@@ -2,6 +2,9 @@
 
 namespace YukataRm\Laravel\Logging\Http\Middleware;
 
+use YukataRm\Laravel\Middleware\BaseMiddleware;
+use Symfony\Component\HttpFoundation\Response;
+
 use YukataRm\Laravel\Logging\Http\Logger;
 use YukataRm\Laravel\Logging\Http\Contents;
 
@@ -10,12 +13,6 @@ use YukataRm\Laravel\Logging\Http\Trait\Config;
 use YukataRm\Timer\Interface\TimerInterface;
 use YukataRm\Timer\Proxy\Timer;
 
-use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
-use Illuminate\Http\Response as IlluminateResponse;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\JsonResponse;
-
 use YukataRm\Warehouse\Proxy\Warehouse;
 
 /**
@@ -23,7 +20,7 @@ use YukataRm\Warehouse\Proxy\Warehouse;
  * 
  * @package YukataRm\Laravel\Logging\Http\Middleware
  */
-class LoggingMiddleware
+class LoggingMiddleware extends BaseMiddleware
 {
     use Config;
 
@@ -35,34 +32,31 @@ class LoggingMiddleware
     public TimerInterface $timer;
 
     /**
-     * handle an incoming request
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \Closure $next
+     * run the middleware handle
+     * 
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function handle(Request $request, \Closure $next): SymfonyResponse
+    public function runHandle(): Response
     {
-        if (!$this->isEnable()) return $next($request);
+        if (!$this->isEnable()) return $this->next();
 
         $this->timer = Timer::start();
 
-        return $next($request);
+        return $this->next();
     }
 
     /**
-     * terminate an incoming request
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param IlluminateResponse|RedirectResponse|JsonResponse $response
+     * run the middleware terminate
+     * 
      * @return void
      */
-    public function terminate(Request $request, IlluminateResponse|RedirectResponse|JsonResponse $response): void
+    public function runTerminate(): void
     {
         if (!$this->isEnable()) return;
 
         $this->timer->stop();
 
-        $contents = new Contents($this->timer, $request, $response);
+        $contents = new Contents($this->timer, $this->request, $this->response);
 
         $masked = Warehouse::maskingRecursive(
             $contents->get(),

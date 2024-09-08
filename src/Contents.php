@@ -8,9 +8,7 @@ use YukataRm\Timer\Interface\TimerInterface;
 
 use Illuminate\Http\Request;
 
-use Illuminate\Http\Response;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Contents
@@ -28,13 +26,10 @@ class Contents
      * 
      * @param \YukataRm\Timer\Interface\TimerInterface $timer
      * @param \Illuminate\Http\Request $request
-     * @param \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse $response
+     * @param \Symfony\Component\HttpFoundation\Response
      */
-    public function __construct(
-        TimerInterface $timer,
-        Request $request,
-        Response|RedirectResponse|JsonResponse $response
-    ) {
+    public function __construct(TimerInterface $timer, Request $request, Response $response)
+    {
         $this->timer    = $timer;
         $this->request  = $request;
         $this->response = $response;
@@ -61,8 +56,7 @@ class Contents
             ],
 
             "response" => [
-                "status"      => $this->responseStatus(),
-                "status_text" => $this->responseStatusText(),
+                "status" => $this->responseStatus(),
             ],
         ];
     }
@@ -176,9 +170,9 @@ class Contents
     /**
      * Response instance
      * 
-     * @var \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
+     * @var \Symfony\Component\HttpFoundation\Response
      */
-    protected Response|RedirectResponse|JsonResponse $response;
+    protected Response $response;
 
     /**
      * get response status
@@ -188,16 +182,6 @@ class Contents
     protected function responseStatus(): int
     {
         return $this->configResponseStatus() ? $this->response->getStatusCode() : "";
-    }
-
-    /**
-     * get response status text
-     * 
-     * @return string
-     */
-    protected function responseStatusText(): string
-    {
-        return $this->configResponseStatusText() ? $this->response->statusText() : "";
     }
 
     /*----------------------------------------*
@@ -294,15 +278,5 @@ class Contents
     public function configResponseStatus(): bool
     {
         return $this->config("response_status", false);
-    }
-
-    /**
-     * get config response status text
-     * 
-     * @return bool
-     */
-    public function configResponseStatusText(): bool
-    {
-        return $this->config("response_status_text", false);
     }
 }

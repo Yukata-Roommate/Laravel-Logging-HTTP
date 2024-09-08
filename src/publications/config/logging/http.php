@@ -38,8 +38,7 @@ return [
         "request_ip_address"  => env("YR_LOGGING_HTTP_REQUEST_IP_ADDRESS", false),
         "request_body"        => env("YR_LOGGING_HTTP_REQUEST_BODY", false),
 
-        "response_status"      => env("YR_LOGGING_HTTP_RESPONSE_STATUS", false),
-        "response_status_text" => env("YR_LOGGING_HTTP_RESPONSE_STATUS_TEXT", false),
+        "response_status" => env("YR_LOGGING_HTTP_RESPONSE_STATUS", false),
     ],
 
     /*----------------------------------------*
