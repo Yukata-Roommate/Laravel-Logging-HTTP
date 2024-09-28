@@ -3,7 +3,7 @@
     "description": "Logging HTTP Access for Laravel",
     "type": "library",
     "license": "MIT",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "autoload": {
         "psr-4": {
             "YukataRm\\Laravel\\Logging\\Http\\": "src"

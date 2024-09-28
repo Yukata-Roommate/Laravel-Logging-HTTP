@@ -58,8 +58,13 @@ class LoggingMiddleware extends BaseMiddleware
 
         $contents = new Contents($this->timer, $this->request, $this->response);
 
-        $masked = Warehouse::maskingRecursive(
+        $removed = Warehouse::removeRecursive(
             $contents->get(),
+            $this->configRemoveParameters()
+        );
+
+        $masked = Warehouse::maskingRecursive(
+            $removed,
             $this->configMaskingParameters(),
             $this->configMaskingText()
         );
@@ -91,6 +96,16 @@ class LoggingMiddleware extends BaseMiddleware
     public function configEnable(): bool
     {
         return $this->config("enable", false);
+    }
+
+    /**
+     * get config remove parameters
+     * 
+     * @return array<string>
+     */
+    public function configRemoveParameters(): array
+    {
+        return $this->config("remove.parameters", []);
     }
 
     /**
